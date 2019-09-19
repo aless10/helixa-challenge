@@ -12,7 +12,7 @@ packages = find_packages(include=['src', 'src.*'])
 
 setup(
     name='helixa_app',
-    version='0.0.1.dev',
+    version='0.0.2-dev.dev',
     author='Alessio Izzo',
     author_email='alessio.izzo86@gmail.com',
     description='An Helixa challenge application',
