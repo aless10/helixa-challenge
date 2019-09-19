@@ -1,0 +1,7 @@
+Flask
+gunicorn
+flake8
+pytest
+tox
+pylint
+bumpversion
