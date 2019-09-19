@@ -18,4 +18,36 @@ The research must be done for the label field. The children are identified by th
 
 ## How to run the application
 
+### With Docker
+
 TODO
+
+### Without docker
+
+#### Set-up virtualenv
+
+1. Create virtualenv:
+```bash
+$ virtualenv -p python3.7 venv37
+```
+
+2. Activate virtualenv
+```bash
+$ source ./venv37/bin/activate
+```
+**Note:** In order to exit from virtual environment use `deactivate`
+
+3. Install all python core libraries
+```bash
+$ pip install -r requirements.txt
+```
+
+### Execution
+
+Work in progress...
+
+### Tests
+
+```bash
+$ pytest tests/
+```
