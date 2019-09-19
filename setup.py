@@ -8,11 +8,11 @@ from pkg_resources import parse_requirements
 with open("requirements.txt", 'r') as inst_reqs:
     install_requires = [str(req) for req in parse_requirements(inst_reqs)]
 
-packages = find_packages(include=['src', 'src.*'])
+packages = find_packages(include=['helixa_app', 'helixa_app.*'])
 
 setup(
     name='helixa_app',
-    version='0.0.2-dev.dev',
+    version='0.0.2.dev',
     author='Alessio Izzo',
     author_email='alessio.izzo86@gmail.com',
     description='An Helixa challenge application',
