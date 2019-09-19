@@ -11,7 +11,7 @@ with open("requirements.txt", 'r') as inst_reqs:
 packages = find_packages(include=['src', 'src.*'])
 
 setup(
-    name='helixa_api',
+    name='helixa_app',
     version='0.0.1.dev',
     author='Alessio Izzo',
     author_email='alessio.izzo86@gmail.com',

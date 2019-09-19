@@ -1,4 +1,4 @@
-from helixa_api import __version__
+from helixa_app import __version__
 
 
 def test_version():
