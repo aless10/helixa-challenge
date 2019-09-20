@@ -11,7 +11,7 @@ export LOG_LEVEL=DEBUG
 
 export GUNICORN_HOST="0.0.0.0"
 export GUNICORN_PORT="5000"
-export GUNICORN_APP_PATH="${HOME}/../farm_bo_api"
+export GUNICORN_APP_PATH="${HOME}/../helixa_api"
 export GUNICORN_APP_MODULE="helixa_api.app:helixa_api_app"
 export GUNICORN_WORKERS_NUMBER="1"
 export GUNICORN_TIMEOUT="60"

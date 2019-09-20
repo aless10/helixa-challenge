@@ -58,5 +58,6 @@ def create_app(config_obj):
     app.config.from_object(config_obj)
     register_request_callbacks(app)
     register_blueprint(app, blueprints=(swaggerui_blueprint, blueprint.v1,))
+    app.url_map.strict_slashes = False
     setup_logging(config_obj)
     return app
