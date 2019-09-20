@@ -1,0 +1,31 @@
+[
+  {
+    "id": -3,
+    "name": "Influencers",
+    "level": 1,
+    "children": [
+      {
+        "l1": -3,
+        "level": 2,
+        "id": 13,
+        "name": "Singers & Bands",
+        "children": [
+          {
+            "l1": -3,
+            "l2": 13,
+            "level": 3,
+            "id": 14,
+            "name": "Classical Music"
+          },
+          {
+            "l1": -3,
+            "l2": 13,
+            "level": 3,
+            "id": 15,
+            "name": "Country Music"
+          }
+        ]
+      }
+    ]
+  }
+]
