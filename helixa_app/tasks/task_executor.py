@@ -2,6 +2,7 @@ import logging
 
 from flask import request, Response
 from marshmallow import ValidationError
+from werkzeug.exceptions import BadRequest, InternalServerError
 
 from helixa_app.schema.schema import RequestSchema, ResponseSchema
 
@@ -24,10 +25,10 @@ class TaskExecutor:
             request_model = RequestSchema().load(request_body)
         except ValidationError as e:
             log.error('Failed Schema Validation: %s', e)
-            self._status_code = 400
+            self._status_code = BadRequest.code
         except Exception as e:
             log.error('Error while validating schema: %s', e)
-            self._status_code = 500
+            self._status_code = InternalServerError.code
         else:
             try:
                 self._result = self.strategy.run(request_model)
@@ -35,8 +36,8 @@ class TaskExecutor:
                 self._status_code = 200
             except Exception:
                 log.exception("Exception occurred in task")
-                self._status_code = 500
+                self._status_code = InternalServerError.code
 
     def make_response(self):
-        return Response((ResponseSchema().dump(self._result)),
-                        status=self._status_code, mimetype='application/json')
+        response_schema_result = ResponseSchema().dump(self._result)
+        return Response(response_schema_result, status=self._status_code, mimetype='application/json')

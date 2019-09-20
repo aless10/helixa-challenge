@@ -1,4 +1,5 @@
 Flask
+marshmallow
 gunicorn
 flake8
 pytest
