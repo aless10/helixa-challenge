@@ -16,6 +16,22 @@ The search must be done for the name field. The children are identified by the c
 ### Psychographics.json
 The research must be done for the label field. The children are identified by the values ​​field.
 
+## Before Running...
+#### Install git client Hooks
+
+1. Open with a terminal and execute
+```bash
+$ git config core.hooksPath git-hooks
+```
+
+This command set git to use hooks saved in `git-hooks` instead of the default `.git/hooks/`.
+
+The pre-commit hook performs a check using:
+ * flake8 (blocking) 
+ * pylint (non blocking)
+ 
+After that, it runs all the tests with coverage. If all the tests pass, it performs the commit.
+
 ## How to run the application
 
 ### With Docker
@@ -42,12 +58,16 @@ $ source ./venv37/bin/activate
 $ pip install -r requirements.txt
 ```
 
-### Execution
+#### Execution
 
-Work in progress...
+To run the application, you can run the command
+```bash
+$ ./local_run/run_helixa_app.sh
+```
+This will run gunicorn who serves the application. The default address is 0.0.0.0:5000.
 
 ### Tests
 
 ```bash
-$ pytest tests/
+$ pytest --cov=helixa_app tests/
 ```
