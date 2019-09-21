@@ -17,19 +17,35 @@ class RequestSchema(Schema):
         return RequestModel(**data)
 
 
+def _set_key(obj: Schema, key: str, data: dict) -> dict:
+    if key in data:
+        setattr(obj, key, fields.List(fields.Dict))
+    return data
+
+
+def _set_key_to_none(key: str, data: dict) -> dict:
+    if key not in data:
+        data[key] = None
+    return data
+
+
 class CategoryAtomSchema(Schema):
     name = fields.Str()
     id = fields.Integer()
     level = fields.Integer()
 
     @pre_dump
-    def add_levels_fields(self, data, **kwargs):
-        pass
+    def check_for_children(self, data, **kwargs):  # pylint: disable=unused-argument
+        return _set_key(self, "children", data)
 
 
 class CategorySchema(CategoryAtomSchema):
     children = fields.List(fields.Nested(CategoryAtomSchema))
     ico = fields.Str()
+
+    @pre_dump
+    def set_children_to_none(self, data, **kwargs):  # pylint: disable=unused-argument
+        return _set_key_to_none("children", data)
 
 
 class PyschoAtomId(fields.Field):
@@ -50,9 +66,7 @@ class PsychoAtomSchema(Schema):
 
     @pre_dump
     def check_for_values(self, data, **kwargs):  # pylint: disable=unused-argument
-        if "values" in data:
-            setattr(self, "values", fields.List(fields.Dict))
-        return data
+        return _set_key(self, "values", data)
 
 
 class PsychographicsSchema(PsychoAtomSchema):
@@ -61,9 +75,7 @@ class PsychographicsSchema(PsychoAtomSchema):
 
     @pre_dump
     def set_values_to_none(self, data, **kwargs):  # pylint: disable=unused-argument
-        if "values" not in data:
-            data['values'] = None
-        return data
+        return _set_key_to_none("values", data)
 
 
 class ResponseSchema(Schema):
