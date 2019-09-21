@@ -13,7 +13,7 @@ class RequestSchema(Schema):
     sublayer = fields.Str(required=False, description="Sublayer")
 
     @post_load
-    def make_request(self, data, **kwargs):
+    def make_request(self, data, **kwargs):  # pylint: disable=unused-argument
         return RequestModel(**data)
 
 
@@ -49,7 +49,7 @@ class PsychoAtomSchema(Schema):
     pic = fields.Str()
 
     @pre_dump
-    def check_for_values(self, data, **kwargs):
+    def check_for_values(self, data, **kwargs):  # pylint: disable=unused-argument
         if "values" in data:
             setattr(self, "values", fields.List(fields.Dict))
         return data
@@ -60,7 +60,7 @@ class PsychographicsSchema(PsychoAtomSchema):
     ico = fields.Str(allow_none=True)
 
     @pre_dump
-    def set_values_to_none(self, data, **kwargs):
+    def set_values_to_none(self, data, **kwargs):  # pylint: disable=unused-argument
         if "values" not in data:
             data['values'] = None
         return data
@@ -74,6 +74,6 @@ class ResponseSchema(Schema):
                                           description="Psychographic filtered element")
 
     @post_dump
-    def to_json(self, data, **kwargs):
+    def to_json(self, data, **kwargs):  # pylint: disable=unused-argument
         cleaned_data = remove_nulls(data)
         return json.dumps(cleaned_data)

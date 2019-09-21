@@ -7,7 +7,7 @@ from helixa_app.schema.schema import RequestModel
 log = logging.getLogger(__name__)
 
 
-class DictLoop:
+class DictLoop:  # pylint: disable=too-few-public-methods
     name = "DictLoop"
 
     @staticmethod
