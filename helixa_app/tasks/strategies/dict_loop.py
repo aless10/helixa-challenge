@@ -18,7 +18,8 @@ class DictLoop:
 def get_obj_from_value(request_model: RequestModel) -> dict:
     category_val = get_value(categories, request_model.value)
     psychographics_val = get_value(psychographics, request_model.value)
-    return {"category": category_val, "psychographics": psychographics_val}
+    return {"category": category_val, "psychographics": psychographics_val,
+            "category_sublayer": {}, "psychographics_sublayer": {}}
 
 
 def get_value(file_info_obj: FileInfo, value: str) -> list:

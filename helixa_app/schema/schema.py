@@ -69,8 +69,9 @@ class PsychographicsSchema(PsychoAtomSchema):
 class ResponseSchema(Schema):
     category = fields.List(fields.Nested(CategorySchema), description="Category elements")
     psychographics = fields.List(fields.Nested(PsychographicsSchema), description="Psychographic elements")
-    category_sublayer = fields.List(fields.Dict, description="Category filtered element")
-    psychographics_sublayer = fields.List(fields.Dict, description="Psychographic filtered element")
+    category_sublayer = fields.List(fields.Nested(CategorySchema), description="Category filtered element")
+    psychographics_sublayer = fields.List(fields.Nested(PsychographicsSchema),
+                                          description="Psychographic filtered element")
 
     @post_dump
     def to_json(self, data, **kwargs):
