@@ -18,6 +18,12 @@ class FileInfo:
         info_from_file = load_json_from_file(cls.filename)
         return cls(info_from_file)
 
+    def filter_from_value(self, value: str) -> 'FileInfo':
+        for v in self.info.values():
+            if v[self.label] == value:
+                return self.__class__([v])
+        return self.__class__([])
+
     def values(self):
         return self.info.values()
 

@@ -18,8 +18,12 @@ class DictLoop:  # pylint: disable=too-few-public-methods
 def get_obj_from_value(request_model: RequestModel) -> dict:
     category_val = get_value(categories, request_model.value)
     psychographics_val = get_value(psychographics, request_model.value)
+    psycho_sublayer = psychographics.filter_from_value(request_model.sublayer)
+    cat_sublayer = categories.filter_from_value(request_model.sublayer)
+    psycho_sublayer_val = get_value(psycho_sublayer, request_model.value)
+    cat_sublayer_val = get_value(cat_sublayer, request_model.value)
     return {"category": category_val, "psychographics": psychographics_val,
-            "category_sublayer": {}, "psychographics_sublayer": {}}
+            "category_sublayer": cat_sublayer_val, "psychographics_sublayer": psycho_sublayer_val}
 
 
 def get_value(file_info_obj: FileInfo, value: str) -> list:
@@ -27,7 +31,12 @@ def get_value(file_info_obj: FileInfo, value: str) -> list:
     match_items = []
     level = 0
     for item in file_info_obj.values():
-        if re.search(f".*{value}.*", item[file_info_obj.label]) and item.get("level") > level:
+        if re.search(f".*{value.lower()}.*", item[file_info_obj.label].lower()):
+            item_level = item.get("level", 0)
+            if item_level > level:
+                match_items = []
+                level = item_level
+            elif item_level < level:
+                continue
             match_items.append(item)
-            level += 1
     return match_items
