@@ -1,8 +1,8 @@
 
 def flatten_dict(_dictionary: dict, children_key: str, result_dict: dict, level: int = 1, label="id") -> dict:
 
+    level += 1
     if children_key not in _dictionary:
-        level += 1
         _dictionary["level"] = _dictionary.get("level", level)
         result_dict.update({_dictionary[label]: _dictionary})
         return result_dict
@@ -17,7 +17,7 @@ def flatten_dict(_dictionary: dict, children_key: str, result_dict: dict, level:
 def flatten_list_to_dict(_list: list, children_key: str) -> dict:
     d = {}
     for item in _list:
-        level = 1
+        level = 0
         d = flatten_dict(item, children_key, result_dict=d, level=level)
     return d
 

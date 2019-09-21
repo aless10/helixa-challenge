@@ -1,3 +1,4 @@
+# flake8: noqa
 from helixa_app.utils.dict_utils import flatten_dict, flatten_list_to_dict, remove_nulls
 
 
@@ -189,66 +190,39 @@ def test_flatten_dict_psychographics():
         "pic": ""
     }
     flatten_result = flatten_dict(test_dict, children_key="values", result_dict=result_input_dict)
-    assert flatten_result == {"lifestyiles-cy": test_dict,
-                              "Adv Strategy": {
-                                  "level": 1,
-                                  "values": [
-                                      {
-                                          "level": 2,
-                                          "value": "Ads Paper",
-                                          "id": 4,
-                                          "pic": "/assets/img/psychographics/ico/psy_4.jpg",
-                                          "label": "Print Ads"
-                                      },
-                                      {
-                                          "level": 2,
-                                          "value": "Ads EmergingMediaVehicles",
-                                          "id": 3,
-                                          "pic": "/assets/img/psychographics/ico/psy_3.jpg",
-                                          "label": "Unconventional Ads"
-                                      },
-                                  ],
-                                  "label": "Advertising",
-                                  "ico": "flaticon-marketing",
-                                  "id": "Adv Strategy"
-                              },
-                              "general-gamers-segments": {
-                                  "level": 1,
-                                  "values": [
-                                      {
-                                          "level": 2,
-                                          "value": "Casual gamers",
-                                          "id": 51,
-                                          "label": "Casual Gamers"
-                                      }
-                                  ],
-                                  "label": "Gaming",
-                                  "ico": "",
-                                  "id": "general-gamers-segments",
-                                  "pic": ""
-                              },
-                              51: {
-                                  "level": 2,
-                                  "value": "Casual gamers",
-                                  "id": 51,
-                                  "label": "Casual Gamers"
-                              },
-                              4: {
-                                  "level": 2,
-                                  "value": "Ads Paper",
-                                  "id": 4,
-                                  "pic": "/assets/img/psychographics/ico/psy_4.jpg",
-                                  "label": "Print Ads"
-                              },
-                              3:
-                                  {
-                                  "level": 2,
-                                  "value": "Ads EmergingMediaVehicles",
-                                  "id": 3,
-                                  "pic": "/assets/img/psychographics/ico/psy_3.jpg",
-                                  "label": "Unconventional Ads"
-                              }
-                              }
+    assert flatten_result == {'lifestyiles-cy':
+        {'values':
+            [
+                {'values':
+                    [
+                        {'value': 'Ads Paper', 'id': 4, 'pic': '/assets/img/psychographics/ico/psy_4.jpg',
+                         'label': 'Print Ads', 'level': 4},
+                        {'value': 'Ads EmergingMediaVehicles', 'id': 3,
+                         'pic': '/assets/img/psychographics/ico/psy_3.jpg', 'label': 'Unconventional Ads', 'level': 4}
+                    ],
+                    'label': 'Advertising', 'ico': 'flaticon-marketing', 'id': 'Adv Strategy', 'level': 3
+                },
+                {'values':
+                    [
+                        {'value': 'Casual gamers', 'id': 51, 'label': 'Casual Gamers', 'level': 4}
+                    ],
+                    'label': 'Gaming', 'ico': '', 'id': 'general-gamers-segments', 'pic': '', 'level': 3
+                }
+            ],
+            'label': 'Lifestyles', 'ico': '', 'id': 'lifestyiles-cy', 'pic': '', 'level': 2},
+        'Adv Strategy': {'values': [
+            {'value': 'Ads Paper', 'id': 4, 'pic': '/assets/img/psychographics/ico/psy_4.jpg', 'label': 'Print Ads',
+             'level': 4},
+            {'value': 'Ads EmergingMediaVehicles', 'id': 3, 'pic': '/assets/img/psychographics/ico/psy_3.jpg',
+             'label': 'Unconventional Ads', 'level': 4}], 'label': 'Advertising', 'ico': 'flaticon-marketing',
+            'id': 'Adv Strategy', 'level': 3},
+        4: {'value': 'Ads Paper', 'id': 4, 'pic': '/assets/img/psychographics/ico/psy_4.jpg', 'label': 'Print Ads',
+            'level': 4},
+        3: {'value': 'Ads EmergingMediaVehicles', 'id': 3, 'pic': '/assets/img/psychographics/ico/psy_3.jpg',
+            'label': 'Unconventional Ads', 'level': 4}, 'general-gamers-segments': {
+            'values': [{'value': 'Casual gamers', 'id': 51, 'label': 'Casual Gamers', 'level': 4}], 'label': 'Gaming',
+            'ico': '', 'id': 'general-gamers-segments', 'pic': '', 'level': 3},
+        51: {'value': 'Casual gamers', 'id': 51, 'label': 'Casual Gamers', 'level': 4}}
 
 
 def test_flatten_dict_list_input_psychographics():
@@ -286,7 +260,8 @@ def test_flatten_dict_list_input_psychographics():
             "pic": ""
         }
     ]
-    assert flatten_list_to_dict(test_list, children_key="values") == {
+    flatten_result = flatten_list_to_dict(test_list, children_key="values")
+    assert flatten_result == {
         "general-gamers-segments": {
             "level": 1,
             "values": [
