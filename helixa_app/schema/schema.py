@@ -20,11 +20,12 @@ class ResponseField(fields.Dict):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.default = {}
+        self.missing = {}
 
 
 class ResponseSchema(Schema):
     category = ResponseField(description="Category element")
-    psychographic = ResponseField(description="Psychographic element")
+    psychographics = ResponseField(description="Psychographic element")
 
     @post_dump
     def to_json(self, data, **kwargs):
