@@ -48,9 +48,13 @@ class CategorySchema(CategoryAtomSchema):
         return _set_key_to_none("children", data)
 
 
-class PyschoAtomId(fields.Field):
+class PsychoAtomId(fields.Field):
 
     def _serialize(self, value, attr, obj, **kwargs):
+        """
+        Since the id field of psycho objects can be an int or a string, we want to return the value without checking
+        its type
+        """
         try:
             value = int(value)
         except ValueError:
@@ -60,7 +64,7 @@ class PyschoAtomId(fields.Field):
 
 class PsychoAtomSchema(Schema):
     value = fields.Str()
-    id = PyschoAtomId()
+    id = PsychoAtomId()
     label = fields.Str()
     pic = fields.Str()
 
