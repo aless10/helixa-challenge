@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "Helixa App challenge",
-    "version": "0.0.3",
+    "version": "0.0.3.dev",
     "title": "Helixa App Api",
     "contact": {
       "email": "alessio.izzo86@gmail.com"
@@ -20,6 +20,23 @@
           "sublayer": {
             "type": "string",
             "format": "string"
+          }
+        }
+      },
+      "responseBody": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "list"
+          },
+          "psychographics": {
+            "type": "list"
+          },
+          "category_sublayer": {
+            "type": "list"
+          },
+          "psychographics_sublayer": {
+            "type": "list"
           }
         }
       }
