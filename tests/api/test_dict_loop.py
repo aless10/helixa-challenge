@@ -7,7 +7,7 @@ from tests.conftest import raise_exception
 
 @mock.patch("helixa_app.tasks.strategies.dict_loop.get_obj_from_value")
 def test_dict_loop_valid_body(mock_get_obj, client):
-    test_return_value = {'psychographics': {
+    test_return_value = {'psychographics': [{
         "values": [
             {
                 "value": "Ads Paper",
@@ -19,10 +19,10 @@ def test_dict_loop_valid_body(mock_get_obj, client):
         "label": "Advertising",
         "ico": "flaticon-marketing",
         "id": "test_value"
-    }, 'category': None}
+    }], 'category': []}
 
     mock_get_obj.return_value = test_return_value
-    body = {"value": "test_value", "sublayer": "test_sublevel"}
+    body = {"value": "test", "sublayer": "test_sublevel"}
     response = client.post(url_for('api_v1.dict-loop'), json=body)
     assert response.status_code == 200
     assert response.json == test_return_value

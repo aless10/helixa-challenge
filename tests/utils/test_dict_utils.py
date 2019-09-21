@@ -1,4 +1,4 @@
-from helixa_app.utils.dict_utils import flatten_dict, flatten_list_to_dict
+from helixa_app.utils.dict_utils import flatten_dict, flatten_list_to_dict, remove_nulls
 
 
 def test_flatten_dict_categories():
@@ -191,14 +191,17 @@ def test_flatten_dict_psychographics():
     flatten_result = flatten_dict(test_dict, children_key="values", result_dict=result_input_dict)
     assert flatten_result == {"lifestyiles-cy": test_dict,
                               "Adv Strategy": {
+                                  "level": 1,
                                   "values": [
                                       {
+                                          "level": 2,
                                           "value": "Ads Paper",
                                           "id": 4,
                                           "pic": "/assets/img/psychographics/ico/psy_4.jpg",
                                           "label": "Print Ads"
                                       },
                                       {
+                                          "level": 2,
                                           "value": "Ads EmergingMediaVehicles",
                                           "id": 3,
                                           "pic": "/assets/img/psychographics/ico/psy_3.jpg",
@@ -210,8 +213,10 @@ def test_flatten_dict_psychographics():
                                   "id": "Adv Strategy"
                               },
                               "general-gamers-segments": {
+                                  "level": 1,
                                   "values": [
                                       {
+                                          "level": 2,
                                           "value": "Casual gamers",
                                           "id": 51,
                                           "label": "Casual Gamers"
@@ -223,11 +228,13 @@ def test_flatten_dict_psychographics():
                                   "pic": ""
                               },
                               51: {
+                                  "level": 2,
                                   "value": "Casual gamers",
                                   "id": 51,
                                   "label": "Casual Gamers"
                               },
                               4: {
+                                  "level": 2,
                                   "value": "Ads Paper",
                                   "id": 4,
                                   "pic": "/assets/img/psychographics/ico/psy_4.jpg",
@@ -235,10 +242,11 @@ def test_flatten_dict_psychographics():
                               },
                               3:
                                   {
-                                      "value": "Ads EmergingMediaVehicles",
-                                      "id": 3,
-                                      "pic": "/assets/img/psychographics/ico/psy_3.jpg",
-                                      "label": "Unconventional Ads"
+                                  "level": 2,
+                                  "value": "Ads EmergingMediaVehicles",
+                                  "id": 3,
+                                  "pic": "/assets/img/psychographics/ico/psy_3.jpg",
+                                  "label": "Unconventional Ads"
                               }
                               }
 
@@ -280,8 +288,10 @@ def test_flatten_dict_list_input_psychographics():
     ]
     assert flatten_list_to_dict(test_list, children_key="values") == {
         "general-gamers-segments": {
+            "level": 1,
             "values": [
                 {
+                    "level": 2,
                     "value": "Casual gamers",
                     "id": 51,
                     "label": "Casual Gamers"
@@ -293,19 +303,23 @@ def test_flatten_dict_list_input_psychographics():
             "pic": ""
         },
         51: {
+            "level": 2,
             "value": "Casual gamers",
             "id": 51,
             "label": "Casual Gamers"
         },
         "Adv Strategy": {
+            "level": 1,
             "values": [
                 {
+                    "level": 2,
                     "value": "Ads Paper",
                     "id": 4,
                     "pic": "/assets/img/psychographics/ico/psy_4.jpg",
                     "label": "Print Ads"
                 },
                 {
+                    "level": 2,
                     "value": "Ads EmergingMediaVehicles",
                     "id": 3,
                     "pic": "/assets/img/psychographics/ico/psy_3.jpg",
@@ -317,15 +331,51 @@ def test_flatten_dict_list_input_psychographics():
             "id": "Adv Strategy"
         },
         4: {
+            "level": 2,
             "value": "Ads Paper",
             "id": 4,
             "pic": "/assets/img/psychographics/ico/psy_4.jpg",
             "label": "Print Ads"
         },
         3: {
+            "level": 2,
             "value": "Ads EmergingMediaVehicles",
             "id": 3,
             "pic": "/assets/img/psychographics/ico/psy_3.jpg",
             "label": "Unconventional Ads"
         }
     }
+
+
+def test_remove_nulls():
+    test_input_obj = {
+        'a': 1,
+        'b': None,
+        'c': {
+            'a': 1,
+            'b': None,
+            'd': [1, 2, 3, None, ['a', 'b', None]]
+        },
+        'd': [
+            1, 2, 3, {
+                'a': 1,
+                'b': None,
+                'd': [1, None, 2]
+            }, None
+        ]
+    }
+
+    expected_output = {
+        'a': 1,
+        'c': {
+            'a': 1,
+            'd': [1, 2, 3, ['a', 'b']]
+        },
+        'd': [
+            1, 2, 3, {
+                'a': 1,
+                'd': [1, 2]
+            },
+        ]
+    }
+    assert remove_nulls(test_input_obj) == expected_output
