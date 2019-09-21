@@ -15,8 +15,16 @@ class RequestSchema(Schema):
         return RequestModel(**data)
 
 
+class ResponseField(fields.Dict):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.default = {}
+
+
 class ResponseSchema(Schema):
-    result = fields.Dict(required=True, description="Value to look for", allow_none=True)
+    category = ResponseField(description="Category element")
+    psychographic = ResponseField(description="Psychographic element")
 
     @post_dump
     def to_json(self, data, **kwargs):

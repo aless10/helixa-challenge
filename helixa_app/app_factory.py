@@ -61,3 +61,16 @@ def create_app(config_obj):
     app.url_map.strict_slashes = False
     setup_logging(config_obj)
     return app
+
+
+def run_app(app):
+    try:
+        log.debug("Starting the Helixa Application with config: %s", app.config)
+        app.run()
+    except Exception:
+        log.error("Error while running the application. Please check if you set the env variables: "
+                  "HELIXA_APP_CONFIG: path to the config file;\n"
+                  "LOG_PATH: path to log folder;\n"
+                  "LOG_LEVEL: log level for the application;\n"
+                  "LOG_CONF: path to log config file")
+        raise
