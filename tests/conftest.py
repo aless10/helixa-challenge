@@ -48,3 +48,7 @@ def client(app):
     """A test client for the app."""
     register_app_endpoints(app)
     return app.test_client()
+
+
+def raise_exception(*args, **kwargs):
+    raise Exception("Function that raises exception")
