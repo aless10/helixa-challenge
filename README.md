@@ -42,6 +42,8 @@ TODO
 
 #### Set-up virtualenv
 
+**Note:** here we use python 3.7 but the application can run with python 3.6+ (or, at least, it should)
+
 1. Create virtualenv:
 ```bash
 $ virtualenv -p python3.7 venv37
