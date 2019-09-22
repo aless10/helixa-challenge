@@ -9,6 +9,9 @@ from flask import Flask, g, request
 from helixa_app.api import blueprint
 from helixa_app.api.swagger import swaggerui_blueprint
 from helixa_app.cache.cache import setup_redis_connection
+from helixa_app.db.repository import populate_db_from_object
+from helixa_app.db.session import create_db
+from helixa_app.schema.file_schema import categories, psychographics
 
 log = logging.getLogger(__name__)
 
@@ -62,6 +65,9 @@ def create_app(config_obj):
     app.url_map.strict_slashes = False
     setup_logging(config_obj)
     setup_redis_connection(app)
+    create_db(config_obj.DATABASE_CONNECTION_URI)
+    populate_db_from_object(categories, config_obj.DATABASE_CONNECTION_URI)
+    populate_db_from_object(psychographics, config_obj.DATABASE_CONNECTION_URI)
     return app
 
 

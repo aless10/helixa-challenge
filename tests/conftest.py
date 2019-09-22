@@ -16,6 +16,7 @@ class TestConfiguration:
     USE_CACHE = False
     REDIS_HOST = '127.0.0.1'
     REDIS_PORT = 6379
+    DATABASE_CONNECTION_URI = "sqlite:///memory"
 
 
 @pytest.fixture

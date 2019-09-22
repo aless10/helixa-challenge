@@ -16,3 +16,4 @@ class HelixaAppConfiguration:
     USE_CACHE = config_parser.getboolean("cache", "use_cache")
     REDIS_HOST = config_parser.get("cache", "redis_host")
     REDIS_PORT = config_parser.get("cache", "redis_port")
+    DATABASE_CONNECTION_URI = config_parser.get("database", "db_connection")

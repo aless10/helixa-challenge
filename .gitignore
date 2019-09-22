@@ -30,3 +30,7 @@ htmlcov/
 
 # Redis
 *.rdb
+
+# Sqlite
+*.db
+*.sqlite[3]

@@ -33,6 +33,13 @@ class CategoryAtomSchema(Schema):
     name = fields.Str()
     id = fields.Integer()
     level = fields.Integer()
+    pic = fields.Str()
+    type = fields.Str()
+    l1 = fields.Int(allow_none=True)
+    l2 = fields.Int(allow_none=True)
+    l3 = fields.Int(allow_none=True)
+    l4 = fields.Int(allow_none=True)
+    l5 = fields.Int(allow_none=True)
 
     @pre_dump
     def check_for_children(self, data, **kwargs):  # pylint: disable=unused-argument
@@ -76,6 +83,7 @@ class PsychoAtomSchema(Schema):
 class PsychographicsSchema(PsychoAtomSchema):
     values = fields.List(fields.Nested(PsychoAtomSchema))
     ico = fields.Str(allow_none=True)
+    sources = fields.List(fields.Nested(fields.Dict))
 
     @pre_dump
     def set_values_to_none(self, data, **kwargs):  # pylint: disable=unused-argument
