@@ -9,9 +9,10 @@ from helixa_app.db.models.base import Base
 log = logging.getLogger(__name__)
 
 
-def create_db(connection_string: str) -> None:
+def create_db(connection_string: str):
     engine = create_engine(connection_string)
     Base.metadata.create_all(engine)
+    return engine
 
 
 def create_session(connection_string: str) -> scoped_session:

@@ -8,6 +8,8 @@ from redis import exceptions as redis_exceptions
 
 log = logging.getLogger(__name__)
 
+REDIS_EXPIRE = 20
+
 
 def call_redis(cmd, *args, **kwargs):
     try:
@@ -40,7 +42,7 @@ def cache(fn):
             if from_cache is None:
                 result = fn(*args, **kwargs)
                 log.debug('cache get MISS setting key %s to value %s', cache_key, result)
-                call_redis(redis_connection.set, cache_key, result.data)
+                call_redis(redis_connection.set, cache_key, result.data, ex=REDIS_EXPIRE)
             else:
                 log.debug('cache get HIT got value %s from key %s', from_cache, cache_key)
                 # from_cache is bytes so we need to translate it into json

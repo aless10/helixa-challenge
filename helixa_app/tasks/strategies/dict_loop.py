@@ -3,15 +3,16 @@ import logging
 
 from helixa_app.schema.file_schema import categories, psychographics, FileInfo
 from helixa_app.schema.schema import RequestModel
+from helixa_app.tasks.strategies.base_strategy import BaseStrategy
 
 log = logging.getLogger(__name__)
 
 
-class DictLoop:  # pylint: disable=too-few-public-methods
+class DictLoop(BaseStrategy):  # pylint: disable=too-few-public-methods
     name = "DictLoop"
 
     @staticmethod
-    def run(input_value) -> dict:
+    def run(input_value: RequestModel) -> dict:
         return get_obj_from_value(input_value)
 
 

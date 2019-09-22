@@ -6,6 +6,8 @@ import pytest
 
 from helixa_app.app_factory import create_app
 
+pytest_plugins = ['tests.fixtures_test_db']
+
 LOCAL_SERVER_NAME = '127.0.0.1:5000'
 
 
@@ -16,7 +18,7 @@ class TestConfiguration:
     USE_CACHE = False
     REDIS_HOST = '127.0.0.1'
     REDIS_PORT = 6379
-    DATABASE_CONNECTION_URI = "sqlite:///memory"
+    DATABASE_CONNECTION_URI = "sqlite://"
 
 
 @pytest.fixture
