@@ -60,6 +60,18 @@ $ pip install -r requirements.txt
 
 #### Execution
 
+You can run the application by executing the module ``app.py``. This will run the application on localhost and the default port is 5000.
+There are a bunch of env variables to set:
+    
+    HELIXA_APP_CONFIG=path/to/conf/file.ini
+    LOG_PATH=path/to/logs/
+    LOG_LEVEL=log level 
+    LOG_CONF=path/to/log/config/file.ini
+    REDIS_HOST_ADDRESS=redis host address
+    REDIS_PORT_BIND=redis port
+    USE_REDIS_CACHE=true if you want to use redis as a cache. false otherwise
+    DATABASE_CONNECTION=connection string to connect the db (sqlite:///helixa_app_dev.db)
+
 To run the application, you can run the command
 ```bash
 $ ./local_run/run_helixa_app.sh
