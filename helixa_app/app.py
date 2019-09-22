@@ -1,4 +1,4 @@
-from conf.config import HelixaAppConfiguration
+from helixa_app.conf.config import HelixaAppConfiguration
 from helixa_app.app_factory import create_app, run_app
 
 

@@ -16,27 +16,29 @@ The search must be done for the name field. The children are identified by the c
 ### Psychographics.json
 The research must be done for the label field. The children are identified by the values ​​field.
 
-## Before Running...
-#### Install git client Hooks
-
-1. Open with a terminal and execute
-```bash
-$ git config core.hooksPath git-hooks
-```
-
-This command set git to use hooks saved in `git-hooks` instead of the default `.git/hooks/`.
-
-The pre-commit hook performs a check using:
- * flake8 (blocking) 
- * pylint (non blocking)
- 
-After that, it runs all the tests with coverage. If all the tests pass, it performs the commit.
 
 ## How to run the application
 
 ### With Docker
 
-TODO
+To run the application, just run the docker-compose:
+
+```bash
+$ docker-compose build
+```
+
+We have two images:
+
+    - redis: we use the redis server as a cache
+    - helixa_app: the application
+    
+You can run the application within the container ``helixa_app`` by running:
+
+```bash
+$ python3 /app/helixa_app/appy.py
+``` 
+
+This should run the application.
 
 ### Without docker
 
@@ -80,8 +82,25 @@ $ ./local_run/run_helixa_app.sh
 ```
 This will run gunicorn who serves the application. The default address is 0.0.0.0:5000.
 
+
 ### Tests
 
 ```bash
 $ pytest --cov=helixa_app tests/
 ```
+
+## Before start making changes...
+#### Install git client Hooks
+
+1. Open with a terminal and execute
+```bash
+$ git config core.hooksPath git-hooks
+```
+
+This command set git to use hooks saved in `git-hooks` instead of the default `.git/hooks/`.
+
+The pre-commit hook performs a check using:
+ * flake8 (blocking) 
+ * pylint (non blocking)
+ 
+After that, it runs all the tests with coverage. If all the tests pass, it performs the commit.

@@ -11,7 +11,8 @@ export LOG_PATH=${HOME}/local_run/logs
 export LOG_LEVEL=DEBUG
 
 export REDIS_CONF=${HOME}/conf/redis.conf
-export REDIS_HOST_ADDRESS="0.0.0.0"
+export USE_REDIS_CACHE=true
+export REDIS_HOST_ADDRESS="127.0.0.1"
 export REDIS_PORT_BIND=6379
 
 export PYTHONPATH=${HOME}

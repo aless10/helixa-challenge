@@ -7,6 +7,7 @@ from logging.config import fileConfig
 from flask import Flask, g, request
 
 from helixa_app.api import blueprint
+from helixa_app.api.index import index
 from helixa_app.api.swagger import swaggerui_blueprint
 from helixa_app.cache.cache import setup_redis_connection
 from helixa_app.db.repository import populate_db_from_object
@@ -61,7 +62,7 @@ def create_app(config_obj):
     app = Flask('helixa_app')
     app.config.from_object(config_obj)
     register_request_callbacks(app)
-    register_blueprint(app, blueprints=(swaggerui_blueprint, blueprint.v1,))
+    register_blueprint(app, blueprints=(index, swaggerui_blueprint, blueprint.v1,))
     app.url_map.strict_slashes = False
     setup_logging(config_obj)
     setup_redis_connection(app)
