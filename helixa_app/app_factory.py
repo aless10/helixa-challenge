@@ -8,6 +8,7 @@ from flask import Flask, g, request
 
 from helixa_app.api import blueprint
 from helixa_app.api.swagger import swaggerui_blueprint
+from helixa_app.cache.cache import setup_redis_connection
 
 log = logging.getLogger(__name__)
 
@@ -60,6 +61,7 @@ def create_app(config_obj):
     register_blueprint(app, blueprints=(swaggerui_blueprint, blueprint.v1,))
     app.url_map.strict_slashes = False
     setup_logging(config_obj)
+    setup_redis_connection(app)
     return app
 
 

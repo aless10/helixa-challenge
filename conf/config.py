@@ -13,3 +13,5 @@ class HelixaAppConfiguration:
     DEBUG = config_parser.get("app", "debug")
     TESTING = config_parser.get("app", "testing")
     LOG_CONF = config_parser.get("logging", "log_conf_path")
+    REDIS_HOST = config_parser.get("cache", "redis_host")
+    REDIS_PORT = config_parser.get("cache", "redis_port")

@@ -13,6 +13,8 @@ class TestConfiguration:
     TESTING = True
     SERVER_NAME = LOCAL_SERVER_NAME
     LOG_CONF = "local_run/local_log_config.ini"
+    REDIS_HOST = '127.0.0.1'
+    REDIS_PORT = 6379
 
 
 @pytest.fixture
