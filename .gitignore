@@ -27,3 +27,6 @@ htmlcov/
 .tox/
 .coverage
 .cache
+
+# Redis
+*.rdb

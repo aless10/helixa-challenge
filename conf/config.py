@@ -10,8 +10,9 @@ class HelixaAppConfiguration:
     # Basic Flask Configuration values
     FLASK_ENV = config_parser.get('app', 'env')
     ENV = config_parser.get('app', 'env')
-    DEBUG = config_parser.get("app", "debug")
-    TESTING = config_parser.get("app", "testing")
+    DEBUG = config_parser.getboolean("app", "debug")
+    TESTING = config_parser.getboolean("app", "testing")
     LOG_CONF = config_parser.get("logging", "log_conf_path")
+    USE_CACHE = config_parser.getboolean("cache", "use_cache")
     REDIS_HOST = config_parser.get("cache", "redis_host")
     REDIS_PORT = config_parser.get("cache", "redis_port")

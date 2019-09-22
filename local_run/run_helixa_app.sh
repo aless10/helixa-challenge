@@ -17,7 +17,7 @@ export REDIS_PORT_BIND=6379
 export PYTHONPATH=${HOME}
 
 export GUNICORN_HOST="0.0.0.0"
-export GUNICORN_PORT="5000"
+export GUNICORN_PORT="5001"
 export GUNICORN_APP_PATH="${PYTHONPATH}helixa_app"
 export GUNICORN_APP_MODULE="helixa_app.app:helixa_app"
 export GUNICORN_WORKERS_NUMBER="1"

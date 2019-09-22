@@ -13,6 +13,9 @@ class BaseTask(MethodView):
         executor.execute()
         return executor.make_response()
 
+    def __str__(self) -> str:
+        return f"View:{self.strategy.name}"
+
 
 class TemplateView(BaseTask):
 
