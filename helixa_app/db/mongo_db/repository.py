@@ -20,17 +20,33 @@ def populate_mongo_db_from_object(file_info_obj: FileInfo, configuration: str):
             log.info("collection %s already populated. Skipping", collection_name)
 
 
+def _get_level(cursor):
+    try:
+        return cursor[0].get("level", 1)
+    except IndexError:
+        return 1
+
+
 def get_from_request(db, _request: RequestModel):
-    category_val = db.categories.find({"name": {"$regex": f".*{_request.value.lower()}.*", "$options": "i"}},
-                                      {"_id": 0})
-    psychographics_val = db.psychographics.find({"label": {"$regex": f".*{_request.value.lower()}.*", "$options": "i"}},
+    cat_level = _get_level(db.categories.find({"name": {"$regex": f".*{_request.value.lower()}.*", "$options": "i"}},
+                                              {"_id": 0, "level": 1}).sort([("level", -1)]).limit(1))
+    category_val = db.categories.find(
+        {"name": {"$regex": f".*{_request.value.lower()}.*", "$options": "i"}, "level": cat_level},
+        {"_id": 0})
+    psychographics_level = _get_level(db.psychographics.find(
+        {"label": {"$regex": f".*{_request.value.lower()}.*", "$options": "i"}},
+        {"_id": 0, "level": 1}).sort([("level", -1)]).limit(1))
+    psychographics_val = db.psychographics.find({"label": {"$regex": f".*{_request.value.lower()}.*", "$options": "i"},
+                                                 "level": psychographics_level},
                                                 {"_id": 0})
     cat_sublayer_val = db.categories.find({"children.name": {"$regex": f".*{_request.value.lower()}.*",
                                                              "$options": "i"},
+                                           "children.level": cat_level,
                                            "name": _request.sublayer},
                                           {"_id": 0})
     psycho_sublayer_val = db.psychographics.find(
         {"values.label": {"$regex": f".*{_request.value.lower()}.*", "$options": "i"},
+         "values.level": psychographics_level,
          "label": _request.sublayer},
         {"_id": 0})
     return {"category": [x for x in category_val],
