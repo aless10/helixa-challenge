@@ -1,9 +1,9 @@
 import pytest
 from sqlalchemy.orm import sessionmaker
 
-from helixa_app.db.session import create_db
-from helixa_app.db.models.category import Category
-from helixa_app.db.models.psychographic import Psychographic
+from helixa_app.db.relational_db.session import create_db
+from helixa_app.db.relational_db.models.category import Category
+from helixa_app.db.relational_db.models.psychographic import Psychographic
 
 
 def db_session():

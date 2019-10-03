@@ -2,10 +2,10 @@ import logging
 
 from sqlalchemy import func
 
-from helixa_app.db.models.category import Category
-from helixa_app.db.models.models_utils import get_children_ids
-from helixa_app.db.models.psychographic import Psychographic
-from helixa_app.db.session import context_session
+from helixa_app.db.relational_db.models.category import Category
+from helixa_app.db.relational_db.models.models_utils import get_children_ids
+from helixa_app.db.relational_db.models.psychographic import Psychographic
+from helixa_app.db.relational_db.session import context_session
 from helixa_app.schema.file_schema import FileInfo
 from helixa_app.schema.schema import RequestModel
 

@@ -4,7 +4,7 @@ from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from helixa_app.db.models.base import Base
+from helixa_app.db.relational_db.models.base import Base
 
 log = logging.getLogger(__name__)
 

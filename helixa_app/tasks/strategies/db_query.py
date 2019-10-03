@@ -2,8 +2,8 @@ import logging
 
 from flask import current_app
 
-from helixa_app.db.repository import get_from_request
-from helixa_app.db.session import context_session
+from helixa_app.db.relational_db.repository import get_from_request
+from helixa_app.db.relational_db.session import context_session
 from helixa_app.schema.schema import RequestModel
 from helixa_app.tasks.strategies.base_strategy import BaseStrategy
 

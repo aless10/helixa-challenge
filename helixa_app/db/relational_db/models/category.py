@@ -1,7 +1,7 @@
 from sqlalchemy import Column, INTEGER, String
 
-from helixa_app.db.models.base import Base
-from helixa_app.db.models.models_utils import JsonBlob
+from helixa_app.db.relational_db.models.base import Base
+from helixa_app.db.relational_db.models.models_utils import JsonBlob
 
 
 class Category(Base):

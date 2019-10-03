@@ -1,4 +1,4 @@
-from helixa_app.db.repository import get_from_request
+from helixa_app.db.relational_db.repository import get_from_request
 from helixa_app.schema.schema import RequestModel
 
 

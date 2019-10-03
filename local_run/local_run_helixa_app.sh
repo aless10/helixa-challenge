@@ -26,5 +26,7 @@ export GUNICORN_TIMEOUT="60"
 export GUNICORN_BIND="${GUNICORN_HOST}:${GUNICORN_PORT}"
 
 redis-server ${REDIS_CONF}
+# RUNNING MONGO DAEMON
+mongod --config /usr/local/etc/mongod.conf
 
 gunicorn --reload --capture-output --bind ${GUNICORN_BIND} --workers ${GUNICORN_WORKERS_NUMBER} --timeout ${GUNICORN_TIMEOUT} ${GUNICORN_APP_MODULE}

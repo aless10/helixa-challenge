@@ -1,4 +1,4 @@
-from helixa_app.db.models.models_utils import get_children_ids
+from helixa_app.db.relational_db.models.models_utils import get_children_ids
 
 
 def test_get_children_ids():

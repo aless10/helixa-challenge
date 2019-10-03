@@ -1,7 +1,7 @@
 import os
 
-from helixa_app.db.models.category import Category
-from helixa_app.db.models.psychographic import Psychographic
+from helixa_app.db.relational_db.models.category import Category
+from helixa_app.db.relational_db.models.psychographic import Psychographic
 from helixa_app.utils.dict_utils import flatten_list_to_dict
 from helixa_app.utils.file_utils import load_json_from_file
 

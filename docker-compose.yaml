@@ -11,6 +11,15 @@ services:
     volumes:
       - ./helixa_app/conf/redis.conf:/usr/local/etc/redis/redis.conf
 
+  mongo_db:
+    build:
+      image: bitnami/mongodb:latest
+    container_name: mongo_db
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker/mongo_db_storage:/bitnami
+
   helixa_app:
     container_name: helixa_app
     build:
@@ -24,7 +33,7 @@ services:
       - REDIS_HOST_ADDRESS=127.0.0.1
       - REDIS_PORT_BIND=6379
       - USE_REDIS_CACHE=true
-      - DATABASE_CONNECTION=sqlite:///helixa_app_dev.db
+      - DATABASE_CONNECTION=relational_db:///helixa_app_dev.db
     tty: true
     stdin_open: true
     volumes:
@@ -38,3 +47,4 @@ services:
       - 5000:5000
     depends_on:
       - redis
+      - mongo_db
